@@ -10,5 +10,9 @@
   "license": "ISC",
   "devDependencies": {
     "prettier": "^1.14.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.291.0",
+    "node-fetch": "^2.2.0"
   }
 }
