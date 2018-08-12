@@ -2,16 +2,19 @@
   "name": "alexapractice",
   "version": "1.0.0",
   "description": "",
-  "main": ".eslintrc.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
     "prettier": "^1.14.2"
   },
   "dependencies": {
+    "alexa-sdk": "^1.0.25",
     "aws-sdk": "^2.291.0",
     "node-fetch": "^2.2.0"
   }
