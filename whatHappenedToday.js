@@ -59,7 +59,7 @@ var handlers = {
     let userDate = this.attributes[USER_DATE];
     let message = "";
 
-    if (userDate == null) {
+    if (!userDate) {
       userDate = pad(mm, 2).concat("月", pad(dd, 2), "日");
       console.log(`using default date, today ${userDate}`);
     }
@@ -76,11 +76,11 @@ var handlers = {
       this.attributes[USER_DATE] = userDate;
     }
 
-    if (this.attributes[FACT_CACHE] == null) {
+    if (!this.attributes[FACT_CACHE]) {
       this.attributes[FACT_CACHE] = {};
     }
 
-    if (this.attributes[FACT_CACHE][userDate] != null) {
+    if (this.attributes[FACT_CACHE][userDate]) {
       console.log(`responding from cache`);
       let data = this.attributes[FACT_CACHE][userDate];
       message = message.concat(
@@ -119,12 +119,12 @@ var handlers = {
 
       this.attributes[FACT_CACHE][userDate] = data;
 
-      if (this.attributes[NEXT_FACT] == null) {
+      if (!this.attributes[NEXT_FACT]) {
         console.log(`NEXT_FACT session attribute does not exist`);
         this.attributes[NEXT_FACT] = {};
       }
 
-      if (this.attributes[NEXT_FACT][userDate] == null) {
+      if (!this.attributes[NEXT_FACT][userDate]) {
         console.log(`NEXT_FACT session attribute for today does not exist`);
         this.attributes[NEXT_FACT][userDate] = data.facts.length - 1;
       }
