@@ -31,11 +31,36 @@ function ifNullSetToday(userDate) {
   }
 }
 
+function parseUserDate(rawUserDates) {
+  let month = rawUserDates[1];
+  let day = rawUserDates[2];
+
+  let validNumber = /^(\d+)$/;
+  let monthInt = month.match(validNumber);
+  let dayInt = day.match(validNumber);
+
+  let error = new Error("invalid date format");
+
+  if (monthInt > 12 || monthInt < 1) {
+    throw error;
+  }
+
+  if (dayInt > 31 || dayInt < 1) {
+    throw error;
+  }
+
+  return "".concat(month, "月", day, "日");
+}
+
 function ifExistsSetUserInput(slots, userDate) {
   if (slots != null) {
     if (slots.UserDate.value != null) {
-      let rawUserDates = slots.UserDate.value.split("-");
-      userDate = "".concat(rawUserDates[1], "月", rawUserDates[2], "日");
+      try {
+        userDate = parseUserDate(slots.UserDate.value.split("-"));
+      } catch (error) {
+        throw error;
+      }
+      userDate = parseUserDate(rawUserDates);
       console.log(`Got user date ${userDate}`);
     }
   }
@@ -58,7 +83,12 @@ let WhatHappenedIntent = function() {
   userDate = ifNullSetToday(this.attributes[USER_DATE]);
 
   // if user wants to hear about diff date
-  userDate = ifExistsSetUserInput(this.event.request.intent.slots, userDate);
+  try {
+    userDate = ifExistsSetUserInput(this.event.request.intent.slots, userDate);
+  } catch (error) {
+    console.log(error);
+    this.emit(":ask", dialogues.INVALID_DATE, dialogues.INVALID_DATE);
+  }
 
   this.attributes[USER_DATE] = userDate;
 
@@ -122,6 +152,7 @@ let WhatHappenedIntent = function() {
     // store as cache
     this.attributes[FACT_CACHE][userDate] = data;
 
+    // if first time to access this date's fact, store which fact was last returned
     if (!todaysFactNumber) {
       this.attributes[NEXT_FACT][userDate] = data.facts.length - 1;
     }
