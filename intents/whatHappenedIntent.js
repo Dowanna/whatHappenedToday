@@ -46,7 +46,7 @@ function generateMessage(prefix, data, factNumber, userDate) {
   return prefix.concat(
     `${data.facts[factNumber].year}の${userDate}, ${
       data.facts[factNumber].fact
-    }。`
+    }。もっと聞きたい？`
   );
 }
 

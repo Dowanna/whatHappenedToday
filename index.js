@@ -20,6 +20,12 @@ var handlers = {
   "AMAZON.HelpIntent": function() {
     this.emit(":ask", dialogues.HELP_REPROMPT);
   },
+  "AMAZON.StopIntent": function() {
+    this.emit(":tell", dialogues.BYE_BYE);
+  },
+  "AMAZON.CancelIntent": function() {
+    this.emit(":tell", dialogues.BYE_BYE);
+  },
   Unhandled: function() {
     this.emit(":ask", dialogues.REPROMPT);
   },
@@ -28,7 +34,6 @@ var handlers = {
   },
   "AMAZON.NoIntent": function() {
     this.emit(":tell", dialogues.BYEBYE);
-    this.emit("AMAZON.StopIntent");
   },
   WhatHappenedIntent: whatHappenedIntent
 };
