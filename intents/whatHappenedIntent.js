@@ -42,7 +42,6 @@ function ifExistsSetUserInput(slots, userDate) {
       } catch (error) {
         throw error;
       }
-      userDate = parseUserDate(rawUserDates);
       console.log(`Got user date ${userDate}`);
     }
   }

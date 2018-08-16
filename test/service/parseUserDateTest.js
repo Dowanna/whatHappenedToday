@@ -30,6 +30,7 @@ describe("parseUserDate", function() {
     testDatas.push(generateTestData(["2018", "00", "16"], ""));
     testDatas.push(generateTestData(["2018", "a", "b"], ""));
     testDatas.push(generateTestData(["2018", "ww", "ddu19"], ""));
+    testDatas.push(generateTestData(["", "", ""], ""));
 
     testDatas.forEach(td => {
       assert.throws(
