@@ -9,6 +9,9 @@ const FACT_CACHE = "factCache";
 // Database
 const factDynamoTableName = "alexa-fact-table";
 
+// Services
+const parseUserDate = require("../service/parseUserDate");
+
 // Helper Method to change 811 -> 0811
 function pad(n, width, z) {
   z = z || "0";
@@ -29,27 +32,6 @@ function ifNullSetToday(userDate) {
   } else {
     return userDate;
   }
-}
-
-function parseUserDate(rawUserDates) {
-  let month = rawUserDates[1];
-  let day = rawUserDates[2];
-
-  let validNumber = /^(\d+)$/;
-  let monthInt = month.match(validNumber);
-  let dayInt = day.match(validNumber);
-
-  let error = new Error("invalid date format");
-
-  if (monthInt > 12 || monthInt < 1) {
-    throw error;
-  }
-
-  if (dayInt > 31 || dayInt < 1) {
-    throw error;
-  }
-
-  return "".concat(month, "月", day, "日");
 }
 
 function ifExistsSetUserInput(slots, userDate) {
@@ -172,3 +154,4 @@ let WhatHappenedIntent = function() {
 };
 
 module.exports = WhatHappenedIntent;
+module.exports.parse;

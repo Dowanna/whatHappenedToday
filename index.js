@@ -27,6 +27,7 @@ var handlers = {
     this.emit(":tell", dialogues.BYE_BYE);
   },
   Unhandled: function() {
+    console.log(`unhandled`);
     this.emit(":ask", dialogues.REPROMPT);
   },
   "AMAZON.YesIntent": function() {
