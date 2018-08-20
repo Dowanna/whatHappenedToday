@@ -56,8 +56,8 @@ function generateMessage(prefix, data, factNumber, userDate) {
   );
 }
 
-let WhatHappenedIntent = function() {
-  let dynamoDb = new AWS.DynamoDB.DocumentClient();
+const WhatHappenedIntent = function() {
+  const dynamoDb = new AWS.DynamoDB.DocumentClient();
   let message = "";
 
   // if first session, no USER_DATE specified in session, so use today as default date
@@ -83,8 +83,8 @@ let WhatHappenedIntent = function() {
     this.attributes[NEXT_FACT] = {};
   }
 
-  let todaysFactNumber = this.attributes[NEXT_FACT][userDate];
-  let todaysFactCache = this.attributes[FACT_CACHE][userDate];
+  const todaysFactNumber = this.attributes[NEXT_FACT][userDate];
+  const todaysFactCache = this.attributes[FACT_CACHE][userDate];
 
   if (todaysFactCache) {
     if (!todaysFactNumber) {
@@ -128,7 +128,7 @@ let WhatHappenedIntent = function() {
       return;
     }
 
-    let data = result.Items[0];
+    const data = result.Items[0];
 
     // store as cache
     this.attributes[FACT_CACHE][userDate] = data;

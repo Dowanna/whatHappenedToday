@@ -1,15 +1,15 @@
 module.exports = function parseUserDate(rawUserDates) {
-  let month = rawUserDates[1];
-  let day = rawUserDates[2];
+  const month = rawUserDates[1];
+  const day = rawUserDates[2];
 
   console.log(`month: ${month}`);
   console.log(`day: ${day}`);
 
-  let validNumber = /^(\d+)$/;
-  let monthInt = month.match(validNumber);
-  let dayInt = day.match(validNumber);
+  const validNumber = /^(\d+)$/;
+  const monthInt = month.match(validNumber);
+  const dayInt = day.match(validNumber);
 
-  let error = new Error("invalid date format");
+  const error = new Error("invalid date format");
 
   if (monthInt == null || monthInt.input > 12 || monthInt.input < 1) {
     throw error;
